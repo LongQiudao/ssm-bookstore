@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bookstore.mapper.TbUserMapperCustom" >
+	
+
+ 	<select id="findByUsername" parameterType="java.lang.String" resultType="bookstore.po.TbUser">
+ 		select * from tb_user where username = '${value}'
+ 	</select>
+ 	<select id="findByCode" parameterType="java.lang.String" resultType="bookstore.po.TbUser">
+ 		select * from tb_user where code ='${value}'
+ 	</select>
+ 
+</mapper>
