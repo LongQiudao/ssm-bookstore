@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bookstore.mapper.OrderitemMapper" >
+  <resultMap id="BaseResultMap" type="bookstore.po.Orderitem" >
+    <id column="iid" property="iid" jdbcType="CHAR" />
+    <result column="count" property="count" jdbcType="INTEGER" />
+    <result column="subtotal" property="subtotal" jdbcType="DECIMAL" />
+    <result column="oid" property="oid" jdbcType="CHAR" />
+    <result column="bid" property="bid" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    iid, count, subtotal, oid, bid
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="bookstore.po.OrderitemExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from orderitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from orderitem
+    where iid = #{iid,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from orderitem
+    where iid = #{iid,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="bookstore.po.OrderitemExample" >
+    delete from orderitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="bookstore.po.Orderitem" >
+    insert into orderitem (iid, count, subtotal, 
+      oid, bid)
+    values (#{iid,jdbcType=CHAR}, #{count,jdbcType=INTEGER}, #{subtotal,jdbcType=DECIMAL}, 
+      #{oid,jdbcType=CHAR}, #{bid,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="bookstore.po.Orderitem" >
+    insert into orderitem
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        iid,
+      </if>
+      <if test="count != null" >
+        count,
+      </if>
+      <if test="subtotal != null" >
+        subtotal,
+      </if>
+      <if test="oid != null" >
+        oid,
+      </if>
+      <if test="bid != null" >
+        bid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="iid != null" >
+        #{iid,jdbcType=CHAR},
+      </if>
+      <if test="count != null" >
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="subtotal != null" >
+        #{subtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="oid != null" >
+        #{oid,jdbcType=CHAR},
+      </if>
+      <if test="bid != null" >
+        #{bid,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="bookstore.po.OrderitemExample" resultType="java.lang.Integer" >
+    select count(*) from orderitem
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update orderitem
+    <set >
+      <if test="record.iid != null" >
+        iid = #{record.iid,jdbcType=CHAR},
+      </if>
+      <if test="record.count != null" >
+        count = #{record.count,jdbcType=INTEGER},
+      </if>
+      <if test="record.subtotal != null" >
+        subtotal = #{record.subtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="record.oid != null" >
+        oid = #{record.oid,jdbcType=CHAR},
+      </if>
+      <if test="record.bid != null" >
+        bid = #{record.bid,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update orderitem
+    set iid = #{record.iid,jdbcType=CHAR},
+      count = #{record.count,jdbcType=INTEGER},
+      subtotal = #{record.subtotal,jdbcType=DECIMAL},
+      oid = #{record.oid,jdbcType=CHAR},
+      bid = #{record.bid,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="bookstore.po.Orderitem" >
+    update orderitem
+    <set >
+      <if test="count != null" >
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="subtotal != null" >
+        subtotal = #{subtotal,jdbcType=DECIMAL},
+      </if>
+      <if test="oid != null" >
+        oid = #{oid,jdbcType=CHAR},
+      </if>
+      <if test="bid != null" >
+        bid = #{bid,jdbcType=CHAR},
+      </if>
+    </set>
+    where iid = #{iid,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="bookstore.po.Orderitem" >
+    update orderitem
+    set count = #{count,jdbcType=INTEGER},
+      subtotal = #{subtotal,jdbcType=DECIMAL},
+      oid = #{oid,jdbcType=CHAR},
+      bid = #{bid,jdbcType=CHAR}
+    where iid = #{iid,jdbcType=CHAR}
+  </update>
+</mapper>
