@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bookstore.mapper.OrdersMapperCustom" >
+	
+
+ 	<select id="findByUid" parameterType="java.lang.String" resultType="bookstore.po.Orders">
+ 		select * from orders where uid = '${value}'
+ 	</select>
+ 	<select id="findOrderItemByOid" parameterType="java.lang.String" resultType="bookstore.po.OrderitemCustom">
+ 		select * from orderitem where oid = '${value}'
+ 	</select>	
+ 	<select id="findOrderCustom" parameterType="java.lang.String" resultType="bookstore.po.OrderCustom">
+ 		SELECT * FROM orders WHERE oid ='${value}'	
+ 	</select>
+ 	<select id="findAll" resultType="bookstore.po.Orders">
+ 		SELECT * FROM orders
+ 	</select>
+ 	<select id="findUnpaid" resultType="bookstore.po.Orders">
+ 		SELECT * FROM orders where state = 1
+ 	</select>
+ 	<select id="findPaid" resultType="bookstore.po.Orders">
+ 		SELECT * FROM orders where state = 2
+ 	</select>
+ 	<select id="findUnreceive" resultType="bookstore.po.Orders">
+ 		SELECT * FROM orders where state = 3
+ 	</select>
+ 	<select id="findSuccess" resultType="bookstore.po.Orders">
+ 		SELECT * FROM orders where state = 4
+ 	</select>
+</mapper>

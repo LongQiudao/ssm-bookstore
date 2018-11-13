@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="bookstore.mapper.BookMapperCustom" >
+	 <select id="findAllBook" resultType="bookstore.po.Book">
+	 	select * from book where del =false
+	 </select>
+	<select id="findByCategory" parameterType="java.lang.String" resultType="bookstore.po.Book">
+			select * from book where cid='${value}' and del = false
+	</select>
+</mapper>
